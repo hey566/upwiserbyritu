@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Shield, Eye, TrendingUp, Lightbulb, Users, Award, Clock, Target } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import Reveal from '@/components/Reveal';
 
 const WhyChooseUs = () => {
   const coreValues = [
@@ -38,18 +38,7 @@ const WhyChooseUs = () => {
       description: "We believe in empowering individuals first, which naturally leads to organizational success",
       stats: "87% report improved job satisfaction"
     },
-    {
-      icon: Award,
-      title: "Expert-Led Training",
-      description: "Learn from Ritu Arora's 20+ years of experience and proven methodologies",
-      stats: "4 bestselling books authored"
-    },
-    {
-      icon: Clock,
-      title: "Efficient & Focused",
-      description: "Streamlined programs that maximize learning while respecting busy professional schedules",
-      stats: "50% less time than traditional training"
-    },
+   
     {
       icon: Target,
       title: "Customized Solutions",
@@ -59,21 +48,24 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-gray-50"style={{ marginLeft: 120, marginRight: 120 }}>
       <div className="container-custom">
+
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Choose <span className="text-gradient">Upwise</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our unique approach combines proven methodologies with real-world application, 
-            ensuring every training investment delivers measurable results.
-          </p>
-        </div>
+        <Reveal direction="up">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose <span className="text-gradient">Upwise</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our unique approach combines proven methodologies with real-world application, 
+              ensuring every training investment delivers measurable results.
+            </p>
+          </div>
+        </Reveal>
 
         {/* Core Values */}
-        <div className="mb-20">
+        <Reveal direction="up">
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Built on Strong Values</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -81,10 +73,12 @@ const WhyChooseUs = () => {
               exceptional outcomes for our clients.
             </p>
           </div>
+        </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {coreValues.map((value, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white border-0 overflow-hidden">
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {coreValues.map((value, index) => (
+            <Reveal key={index} delay={index * 0.15}>
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white border-0 overflow-hidden">
                 <div className={`bg-gradient-to-r ${value.color} p-6`}>
                   <div className="flex items-center justify-center text-white">
                     <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
@@ -97,12 +91,12 @@ const WhyChooseUs = () => {
                   <p className="text-gray-600 leading-relaxed">{value.description}</p>
                 </CardContent>
               </Card>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Key Differentiators */}
-        <div>
+        {/* Differentiators */}
+        <Reveal direction="up">
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">What Sets Us Apart</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -110,10 +104,12 @@ const WhyChooseUs = () => {
               practicality, and measurable results.
             </p>
           </div>
+        </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {differentiators.map((item, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {differentiators.map((item, index) => (
+            <Reveal key={index} delay={index * 0.12}>
+              <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
                 <CardContent className="p-8">
                   <div className="w-12 h-12 bg-gradient-to-br from-upwise-blue-100 to-upwise-teal-100 rounded-lg flex items-center justify-center mb-6">
                     <item.icon className="w-6 h-6 text-upwise-blue-600" />
@@ -125,29 +121,32 @@ const WhyChooseUs = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Testimonial Highlight */}
-        <div className="mt-20 bg-gradient-to-r from-upwise-blue-600 to-upwise-teal-600 rounded-2xl p-12 text-white text-center">
-          <div className="max-w-4xl mx-auto">
-            <blockquote className="text-xl md:text-2xl font-medium mb-6 leading-relaxed">
-              "Ritu's training transformed not just our team's Excel skills, but their entire approach 
-              to data analysis. The practical methods and real-world applications made an immediate 
-              impact on our productivity and decision-making process."
-            </blockquote>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                <Users className="w-6 h-6" />
-              </div>
-              <div className="text-left">
-                <p className="font-semibold">Sarah Chen</p>
-                <p className="text-upwise-blue-100">Head of Operations, TechCorp Solutions</p>
+        {/* Testimonial */}
+        <Reveal direction="up">
+          <div className="mt-20 bg-gradient-to-r from-upwise-blue-600 to-upwise-teal-600 rounded-2xl p-12 text-white text-center">
+            <div className="max-w-4xl mx-auto">
+              <blockquote className="text-xl md:text-2xl font-medium mb-6 leading-relaxed">
+                "Ritu's training transformed not just our team's Excel skills, but their entire approach 
+                to data analysis. The practical methods and real-world applications made an immediate 
+                impact on our productivity and decision-making process."
+              </blockquote>
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold">Sarah Chen</p>
+                  <p className="text-upwise-blue-100">Head of Operations, TechCorp Solutions</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
+        
       </div>
     </section>
   );

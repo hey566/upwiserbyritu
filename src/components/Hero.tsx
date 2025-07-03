@@ -1,8 +1,7 @@
-
 import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Play, Users, BookOpen, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -11,9 +10,9 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video with Parallax */}
-      <motion.div 
-        className="absolute inset-0 z-0" 
+      {/* ✅ Background Video */}
+      <motion.div
+        className="absolute inset-0 z-0"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
         <video
@@ -21,138 +20,83 @@ const Hero = () => {
           muted
           loop
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover"
+          poster="https://cdn.prod.website-files.com/6482a3cf7db698c2a80cc5e6/658bf6b59113ee53db7804e9_Video-poster.webp"
         >
           <source
-            src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69fabf10842821ce92b8b439f1fcb1020&profile_id=139&oauth2_token_id=57447761"
+            src="https://assets-global.website-files.com/6482a3cf7db698c2a80cc5e6/657947aacb60655a82134c6e_Video-transcode.mp4"
             type="video/mp4"
           />
-          {/* Fallback for corporate training */}
-          <img
-            src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-            alt="Corporate training session"
-            className="w-full h-full object-cover"
-          />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80" />
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-20 container-custom text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
+      {/* ✅ Hero Content */}
+      <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
         >
-          <div className="space-y-6">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-5xl mx-auto"
-            >
-              Empowering professionals to{' '}
-              <span className="text-upwise-teal-400">grow smarter</span>,{' '}
-              <span className="text-upwise-teal-400">present sharper</span>, and{' '}
-              <span className="text-upwise-teal-400">perform better</span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-3xl mx-auto"
-            >
-              Transform your career with expert-led corporate training in Excel, PowerPoint, Communication, and Productivity. 
-              Led by Ritu Arora's 20+ years of experience in empowering professionals worldwide.
-            </motion.p>
-          </div>
+          Empowering professionals to{' '}
+          <span className="text-teal-400">grow smarter</span>,{' '}
+          <span className="text-cyan-400">present sharper</span>, and{' '}
+          <span className="text-yellow-300">perform better</span>
+        </motion.h1>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 py-6"
-          >
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
-            >
-              <Users className="w-5 h-5 text-upwise-teal-400" />
-              <span className="text-sm text-white">10,000+ Professionals Trained</span>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
-            >
-              <BookOpen className="w-5 h-5 text-upwise-teal-400" />
-              <span className="text-sm text-white">4 Published Books</span>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
-            >
-              <TrendingUp className="w-5 h-5 text-upwise-teal-400" />
-              <span className="text-sm text-white">20+ Years Experience</span>
-            </motion.div>
-          </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-6 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"
+        >
+          Transform your career with expert-led corporate training in Excel, PowerPoint, Communication, and
+          Productivity.
+        </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                size="lg" 
-                className="bg-upwise-teal-600 hover:bg-upwise-teal-700 text-white px-8 py-4 text-lg rounded-full group shadow-2xl"
-                onClick={() => document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Explore Programs
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg rounded-full group bg-transparent backdrop-blur-sm"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <Play className="mr-2 w-5 h-5" />
-                Schedule a Demo
-              </Button>
-            </motion.div>
-          </motion.div>
+        {/* ✅ Stats */}
+        <motion.div
+          className="mt-8 flex flex-wrap justify-center gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          {[
+            { icon: Users, label: '10,000+ Professionals Trained' },
+            { icon: BookOpen, label: '4 Published Books' },
+            { icon: TrendingUp, label: '20+ Years Experience' },
+          ].map(({ icon: Icon, label }, index) => (
+            <div
+              key={index}
+              className="flex items-center space-x-2 px-4 py-2 bg-white/10 text-white rounded-full backdrop-blur-sm"
+            >
+              <Icon className="w-5 h-5 text-teal-400" />
+              <span className="text-sm">{label}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* ✅ CTA Buttons */}
+        <motion.div
+          className="mt-10 flex flex-col sm:flex-row justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <Button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 text-lg rounded-full flex items-center gap-2">
+            Explore Programs <ArrowRight className="w-5 h-5" />
+          </Button>
+            <Button
+            variant="outline"
+            className="bg-white text-black hover:bg-gray-100 hover:text-black px-6 py-3 text-lg rounded-full flex items-center gap-2 border-white"
+            >
+            <Play className="w-5 h-5" />
+            Schedule a Demo
+            </Button>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-white text-sm">Scroll to explore</span>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white rounded-full mt-2"
-            />
-          </motion.div>
-        </div>
-      </motion.div>
     </section>
   );
 };

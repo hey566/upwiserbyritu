@@ -86,7 +86,34 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
+/* Add to your existing CSS */
+@layer components {
+  /* Premium button */
+  .btn-premium {
+    @apply px-6 py-3 rounded-lg font-medium 
+           bg-gradient-to-r from-upwise-blue-500 to-upwise-teal
+           text-white shadow-md hover:shadow-lg
+           transition-all hover:brightness-105;
+  }
+  
+  /* Editorial section */
+  .editorial-section {
+    @apply py-24 space-y-12;
+    & h2 {
+      @apply text-center max-w-3xl mx-auto;
+    }
+  }
+  
+  /* Logo animation */
+  .logo-mark {
+    path {
+      @apply transition-all duration-300;
+    }
+    &:hover path {
+      transform: translateY(-2px);
+    }
+  }
+}
 @layer base {
   * {
     @apply border-border;
@@ -126,4 +153,69 @@ All colors MUST be HSL.
   .text-gradient {
     @apply bg-gradient-to-r from-upwise-blue-600 to-upwise-teal-600 bg-clip-text text-transparent;
   }
+}
+:root {
+  --bg-royal-blue: #1a3fa8;
+  --text-midnight-blue: #1a237e;
+}
+
+.solutions-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.solutions-header-block {
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.solution-gradient-block {
+  background: linear-gradient(90deg, #ACC8FF 0%, #F1EEFA 100%);
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.upskill-div {
+  background-color: var(--bg-royal-blue);
+  border-radius: 5px;
+  margin: 10px;
+  padding: 8px;
+  color: white;
+}
+
+.text-color-midnight-blue {
+  color: var(--text-midnight-blue);
+}
+
+.text-color-white {
+  color: white;
+}
+
+.text-align-center {
+  text-align: center;
+}
+.section-new-trainers {
+  background-color: #e9f0ff;
+  padding: 60px 40px;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .mobile-hide-image {
+    display: none;
+  }
+}
+
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
