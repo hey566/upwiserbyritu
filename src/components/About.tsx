@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '@/hooks/useScrollAnimation';
 
 const About = () => {
-  const { ref: titleRef, controls: titleControls } = useScrollAnimation();
   const { ref: contentRef, controls: contentControls } = useScrollAnimation();
   const { ref: statsRef, controls: statsControls } = useScrollAnimation();
 
@@ -48,7 +47,7 @@ const About = () => {
               </div>
               
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900">Our Mission</h3>
+                <h3 className="text-xl font-semibent text-gray-900">Our Mission</h3>
                 <p className="text-gray-600">
                   We deliver world-class corporate training that bridges the gap between knowledge and application, 
                   ensuring professionals not just learn, but excel in their careers.
@@ -58,29 +57,38 @@ const About = () => {
 
             {/* Core Values */}
             <motion.div variants={fadeInLeft} className="grid grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-upwise-blue-50 rounded-xl">
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-4 bg-upwise-blue-50 rounded-xl"
+              >
                 <div className="w-12 h-12 bg-upwise-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <Target className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Trust</h4>
                 <p className="text-sm text-gray-600">Built on reliability and expertise</p>
-              </div>
+              </motion.div>
               
-              <div className="text-center p-4 bg-upwise-teal-50 rounded-xl">
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-4 bg-upwise-teal-50 rounded-xl"
+              >
                 <div className="w-12 h-12 bg-upwise-teal-600 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Clarity</h4>
                 <p className="text-sm text-gray-600">Clear, actionable learning outcomes</p>
-              </div>
+              </motion.div>
               
-              <div className="text-center p-4 bg-upwise-coral-50 rounded-xl">
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-4 bg-upwise-coral-50 rounded-xl"
+              >
                 <div className="w-12 h-12 bg-upwise-coral-600 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <Award className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Performance</h4>
                 <p className="text-sm text-gray-600">Measurable results and growth</p>
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
@@ -106,7 +114,11 @@ const About = () => {
               variants={staggerContainer}
               className="absolute -bottom-8 -left-8 right-8"
             >
-              <motion.div variants={fadeInUp} className="bg-white p-6 rounded-xl shadow-lg mb-4">
+              <motion.div 
+                variants={fadeInUp} 
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-6 rounded-xl shadow-lg mb-4"
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-2xl font-bold text-upwise-blue-600">10,000+</p>
@@ -116,7 +128,11 @@ const About = () => {
                 </div>
               </motion.div>
               
-              <motion.div variants={fadeInUp} className="bg-white p-6 rounded-xl shadow-lg">
+              <motion.div 
+                variants={fadeInUp} 
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-6 rounded-xl shadow-lg"
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-2xl font-bold text-upwise-teal-600">20+ Years</p>

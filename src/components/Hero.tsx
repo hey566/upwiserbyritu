@@ -2,33 +2,40 @@
 import React from 'react';
 import { ArrowRight, Play, Users, BookOpen, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
+  const heroScale = useTransform(scrollY, [0, 300], [1, 1.1]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+      {/* Background Video with Parallax */}
+      <motion.div 
+        className="absolute inset-0 z-0" 
+        style={{ opacity: heroOpacity, scale: heroScale }}
       >
-        <source
-          src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69fabf10842821ce92b8b439f1fcb1020&profile_id=139&oauth2_token_id=57447761"
-          type="video/mp4"
-        />
-        {/* Fallback image if video doesn't load */}
-        <img
-          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-          alt="Professional team collaboration"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-        />
-      </video>
-
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/50 z-10"></div>
+        >
+          <source
+            src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69fabf10842821ce92b8b439f1fcb1020&profile_id=139&oauth2_token_id=57447761"
+            type="video/mp4"
+          />
+          {/* Fallback for corporate training */}
+          <img
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            alt="Corporate training session"
+            className="w-full h-full object-cover"
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80"></div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-20 container-custom text-center">
@@ -69,18 +76,27 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap justify-center gap-8 py-6"
           >
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+            >
               <Users className="w-5 h-5 text-upwise-teal-400" />
               <span className="text-sm text-white">10,000+ Professionals Trained</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            </motion.div>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+            >
               <BookOpen className="w-5 h-5 text-upwise-teal-400" />
               <span className="text-sm text-white">4 Published Books</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            </motion.div>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+            >
               <TrendingUp className="w-5 h-5 text-upwise-teal-400" />
               <span className="text-sm text-white">20+ Years Experience</span>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* CTA Buttons */}
@@ -90,23 +106,27 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button 
-              size="lg" 
-              className="bg-upwise-teal-600 hover:bg-upwise-teal-700 text-white px-8 py-4 text-lg rounded-full group shadow-2xl"
-              onClick={() => document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Explore Programs
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg rounded-full group bg-transparent backdrop-blur-sm"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Play className="mr-2 w-5 h-5" />
-              Schedule a Demo
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                size="lg" 
+                className="bg-upwise-teal-600 hover:bg-upwise-teal-700 text-white px-8 py-4 text-lg rounded-full group shadow-2xl"
+                onClick={() => document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Explore Programs
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg rounded-full group bg-transparent backdrop-blur-sm"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Play className="mr-2 w-5 h-5" />
+                Schedule a Demo
+              </Button>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
