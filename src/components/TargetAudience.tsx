@@ -2,8 +2,14 @@ import React from 'react';
 import { Briefcase, Users, TrendingUp, GraduationCap, Building2, UserCheck } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Reveal from '@/components/Reveal';
+import { motion, Variants } from 'framer-motion';
 
 const TargetAudience = () => {
+  // Animation timing configuration
+  const baseDelay = 0.1;
+  const stepDelay = 0.15;
+  const baseDuration = 0.6;
+
   const primaryAudience = [
     {
       icon: Briefcase,
@@ -42,12 +48,21 @@ const TargetAudience = () => {
     }
   ];
 
+  // Card hover variants for motion.div wrapping Card
+  const cardHoverVariants: Variants = {
+    hover: {
+      scale: 1.03,
+      boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
+      transition: { duration: 0.25, ease: "easeOut" }
+    }
+  };
+
   return (
-    <section className="py-12 bg-white" style={{ marginLeft: 120, marginRight: 120 }}>
+    <section className="py-12 bg-white md:mx-[120px] mx-0">
       <div className="container-custom">
 
         {/* Header */}
-        <Reveal direction="up">
+        <Reveal delay={baseDelay}>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Who We <span className="text-gradient">Serve</span>
@@ -59,8 +74,8 @@ const TargetAudience = () => {
           </div>
         </Reveal>
 
-        {/* Primary Audience */}
-        <Reveal direction="up">
+        {/* Primary Audience Header */}
+        <Reveal delay={baseDelay + stepDelay}>
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Primary Audience</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -69,39 +84,62 @@ const TargetAudience = () => {
           </div>
         </Reveal>
 
+        {/* Primary Audience Cards */}
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           {primaryAudience.map((audience, index) => (
-            <Reveal key={index} delay={index * 0.2}>
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white border-0 overflow-hidden">
-                <div className={`bg-gradient-to-r ${audience.color} p-6`}>
-                  <div className="flex items-center space-x-4 text-white">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                      <audience.icon className="w-6 h-6" />
-                    </div>
-                    <CardTitle className="text-xl font-bold">{audience.title}</CardTitle>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <p className="text-gray-600 mb-6 leading-relaxed">{audience.description}</p>
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-gray-900 mb-3">Key Characteristics:</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {audience.characteristics.map((char, charIndex) => (
-                        <div key={charIndex} className="flex items-center text-sm text-gray-700">
-                          <div className="w-2 h-2 bg-upwise-blue-500 rounded-full mr-3 flex-shrink-0"></div>
-                          {char}
-                        </div>
-                      ))}
+            <Reveal 
+              key={index} 
+              delay={baseDelay + stepDelay * (2 + index)}
+            >
+              <motion.div variants={cardHoverVariants} whileHover="hover">
+                <Card className="group bg-white border-0 overflow-hidden h-full">
+                  <div className={`bg-gradient-to-r ${audience.color} p-6`}>
+                    <div className="flex items-center space-x-4 text-white">
+                      <motion.div 
+                        className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center"
+                        initial={{ rotate: 0 }}
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                      >
+                        <audience.icon className="w-6 h-6" />
+                      </motion.div>
+                      <CardTitle className="text-xl font-bold">{audience.title}</CardTitle>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-6">
+                    <motion.p 
+                      className="text-gray-600 mb-6 leading-relaxed"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      {audience.description}
+                    </motion.p>
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-gray-900 mb-3">Key Characteristics:</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {audience.characteristics.map((char, charIndex) => (
+                          <motion.div 
+                            key={charIndex} 
+                            className="flex items-center text-sm text-gray-700"
+                            initial={{ x: -10, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 * charIndex }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="w-2 h-2 bg-upwise-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+                            {char}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </Reveal>
           ))}
         </div>
 
-        {/* Secondary Audience */}
-        <Reveal direction="up">
+        {/* Secondary Audience Header */}
+        <Reveal delay={baseDelay + stepDelay * 4}>
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Secondary Audience</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -109,70 +147,53 @@ const TargetAudience = () => {
             </p>
           </div>
         </Reveal>
-
+        {/* Secondary Audience Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {secondaryAudience.map((audience, index) => (
-            <Reveal key={index} delay={index * 0.15}>
-              <Card className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-gray-50 to-white">
-                <CardHeader className="pb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-upwise-blue-100 to-upwise-teal-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <audience.icon className="w-8 h-8 text-upwise-blue-600" />
-                  </div>
-                  <CardTitle className="text-lg font-bold text-gray-900">{audience.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-6 leading-relaxed">{audience.description}</p>
-                  <div className="space-y-2">
-                    {audience.benefits.map((benefit, benefitIndex) => (
-                      <span
-                        key={benefitIndex}
-                        className="inline-block px-3 py-1 bg-upwise-blue-100 text-upwise-blue-800 text-sm rounded-full mr-2 mb-2"
-                      >
-                        {benefit}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+            <Reveal 
+              key={index} 
+              delay={baseDelay + stepDelay * (5 + index)}
+            >
+              <motion.div>
+                <Card className="text-center bg-gradient-to-br from-gray-50 to-white h-full">
+                  <CardHeader className="pb-4">
+                    <motion.div 
+                      className="w-16 h-16 bg-gradient-to-br from-upwise-blue-100 to-upwise-teal-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <audience.icon className="w-8 h-8 text-upwise-blue-600" />
+                    </motion.div>
+                    <CardTitle className="text-lg font-bold text-gray-900">{audience.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <motion.p 
+                      className="text-gray-600 mb-6 leading-relaxed"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      {audience.description}
+                    </motion.p>
+                    <div className="space-y-2">
+                      {audience.benefits.map((benefit, benefitIndex) => (
+                        <motion.span
+                          key={benefitIndex}
+                          className="inline-block px-3 py-1 bg-upwise-blue-100 text-upwise-blue-800 text-sm rounded-full mr-2 mb-2"
+                          initial={{ scale: 0.9, opacity: 0.7 }}
+                          whileInView={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.1 * benefitIndex }}
+                          viewport={{ once: true }}
+                        >
+                          {benefit}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </Reveal>
           ))}
         </div>
-
-        {/* Success Stats */}
-        <Reveal direction="up">
-            <div
-            className="mt-20 text-center rounded-2xl p-12"
-            style={{
-              background: "linear-gradient(90deg, #ACC8FF 0%, #F1EEFA 100%)"
-            }}
-            >
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Join Thousands of Successful Professionals</h3>
-            <p className="text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-              From entry-level analysts to C-suite executives, our programs have helped professionals 
-              across industries achieve their career goals and drive organizational success. 
-              See how our targeted approach can work for you.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-upwise-blue-600">95%</div>
-                <div className="text-sm text-gray-600">Skill Improvement</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-upwise-teal-600">87%</div>
-                <div className="text-sm text-gray-600">Career Advancement</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-upwise-coral-500">92%</div>
-                <div className="text-sm text-gray-600">Recommend to Others</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">100+</div>
-                <div className="text-sm text-gray-600">Corporate Clients</div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
       </div>
     </section>
   );

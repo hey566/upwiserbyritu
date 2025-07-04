@@ -95,7 +95,10 @@ All colors MUST be HSL.
            text-white shadow-md hover:shadow-lg
            transition-all hover:brightness-105;
   }
-  
+  body {
+  @apply bg-background text-foreground font-sans;
+}
+
   /* Editorial section */
   .editorial-section {
     @apply py-24 space-y-12;
@@ -103,7 +106,23 @@ All colors MUST be HSL.
       @apply text-center max-w-3xl mx-auto;
     }
   }
-  
+  /* If you need the exact light blue from the original */
+.text-blue-500 {
+  color: #3b82f6; /* Change to match your exact light blue */
+}
+
+/* Card hover effect */
+.hover\\:shadow-lg:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Transition effects */
+.transition-all {
+  transition-property: all;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
   /* Logo animation */
   .logo-mark {
     path {
@@ -128,7 +147,7 @@ All colors MUST be HSL.
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-sans;
   }
 
   /* Hide scrollbar for video elements */

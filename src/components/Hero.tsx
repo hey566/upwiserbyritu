@@ -1,6 +1,7 @@
+// components/Hero.tsx
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Play, Users, BookOpen, TrendingUp } from 'lucide-react';
+import { ArrowRight, Play, Users, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
@@ -9,8 +10,8 @@ const Hero = () => {
   const heroScale = useTransform(scrollY, [0, 300], [1, 1.1]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* ✅ Background Video */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id='hero'>
+      {/* Background Video */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ opacity: heroOpacity, scale: heroScale }}
@@ -32,40 +33,35 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80" />
       </motion.div>
 
-      {/* ✅ Hero Content */}
-      <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+      {/* Hero Content */}
+      <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+          className="text-4xl md:text-6xl font-bold text-white leading-tight"
         >
-          Empowering professionals to{' '}
-          <span className="text-teal-400">grow smarter</span>,{' '}
-          <span className="text-cyan-400">present sharper</span>, and{' '}
-          <span className="text-yellow-300">perform better</span>
+          Upskill with <span className="text-teal-400">clarity</span>, <span className="text-cyan-400">confidence</span> & <span className="text-yellow-300">impact</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"
+          transition={{ duration: 0.6, delay: 1 }}
+          className="mt-4 text-lg md:text-xl text-gray-200"
         >
-          Transform your career with expert-led corporate training in Excel, PowerPoint, Communication, and
-          Productivity.
+          Live-led training in communication, productivity & presentation skills.
         </motion.p>
 
-        {/* ✅ Stats */}
+        {/* Mini Stats */}
         <motion.div
-          className="mt-8 flex flex-wrap justify-center gap-6"
+          className="mt-6 flex flex-wrap justify-center gap-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
         >
           {[
-            { icon: Users, label: '10,000+ Professionals Trained' },
-            { icon: BookOpen, label: '4 Published Books' },
+            { icon: Users, label: '10,000+ Trained' },
             { icon: TrendingUp, label: '20+ Years Experience' },
           ].map(({ icon: Icon, label }, index) => (
             <div
@@ -78,22 +74,36 @@ const Hero = () => {
           ))}
         </motion.div>
 
-        {/* ✅ CTA Buttons */}
+        {/* CTA Buttons */}
         <motion.div
-          className="mt-10 flex flex-col sm:flex-row justify-center gap-4"
+          className="mt-8 flex flex-col sm:flex-row justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
         >
-          <Button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 text-lg rounded-full flex items-center gap-2">
+          <Button
+            className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 text-lg rounded-full flex items-center gap-2"
+            onClick={() => {
+              const programsSection = document.getElementById('programs');
+              if (programsSection) {
+                programsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
             Explore Programs <ArrowRight className="w-5 h-5" />
           </Button>
             <Button
             variant="outline"
             className="bg-white text-black hover:bg-gray-100 hover:text-black px-6 py-3 text-lg rounded-full flex items-center gap-2 border-white"
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             >
             <Play className="w-5 h-5" />
-            Schedule a Demo
+            Schedule Demo
             </Button>
         </motion.div>
       </div>

@@ -6,9 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import Reveal from '@/components/Reveal'; // ✅ Add this line
+import Reveal from '@/components/Reveal';
 
 const Contact = () => {
+  // Animation timing configuration
+  const baseDelay = 0.1;
+  const stepDelay = 0.15;
+  const baseDuration = 0.6;
+
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -83,12 +88,12 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gray-50" style={{ marginLeft: 120, marginRight: 120 }}>
+    <section id="contact" className="section-padding bg-gray-50 md:mx-[120px] mx-0">
       <div className="container-custom">
         
         {/* Header */}
-        <Reveal>
-          <div className="text-center mb-16 animate-fade-in">
+        <Reveal delay={baseDelay} duration={baseDuration}>
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Get in <span className="text-gradient">Touch</span>
             </h2>
@@ -101,8 +106,8 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Information */}
-          <Reveal>
-            <div className="space-y-8">
+          <div className="space-y-8">
+            <Reveal delay={baseDelay + stepDelay} duration={baseDuration}>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Connect</h3>
                 <p className="text-gray-600 leading-relaxed mb-8">
@@ -110,10 +115,16 @@ const Contact = () => {
                   our Trainer Culture Kit, we're here to help you achieve your goals.
                 </p>
               </div>
+            </Reveal>
 
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <Card key={index} className="hover:shadow-md transition-shadow bg-white">
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => (
+                <Reveal 
+                  key={index}
+                  delay={baseDelay + stepDelay * (2 + index * 0.3)}
+                  duration={baseDuration}
+                >
+                  <Card className="hover:shadow-md transition-shadow bg-white">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-upwise-blue-100 to-upwise-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -127,9 +138,11 @@ const Contact = () => {
                       </div>
                     </CardContent>
                   </Card>
-                ))}
-              </div>
+                </Reveal>
+              ))}
+            </div>
 
+            <Reveal delay={baseDelay + stepDelay * 3} duration={baseDuration}>
               <div className="space-y-4">
                 <h4 className="font-semibold text-gray-900">Quick Actions</h4>
                 <div className="space-y-3">
@@ -157,13 +170,12 @@ const Contact = () => {
                   </Button>
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
           {/* Contact Form */}
-          
-            <div className="lg:col-span-2">
-              <Reveal>
+          <div className="lg:col-span-2">
+            <Reveal delay={baseDelay + stepDelay * 1.5} duration={baseDuration}>
               <Card className="bg-white shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-gray-900">Send us a Message</CardTitle>
@@ -171,94 +183,103 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <Reveal delay={baseDelay + stepDelay * 2} duration={baseDuration * 0.8}>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                          <Input
+                            type="text"
+                            value={formData.name}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
+                            placeholder="Enter your full name"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                          <Input
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            placeholder="your.email@company.com"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </Reveal>
+
+                    <Reveal delay={baseDelay + stepDelay * 2.2} duration={baseDuration * 0.8}>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Company/Organization</label>
+                          <Input
+                            type="text"
+                            value={formData.company}
+                            onChange={(e) => handleInputChange('company', e.target.value)}
+                            placeholder="Your company name"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                          <Input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            placeholder="+1 (555) 123-4567"
+                          />
+                        </div>
+                      </div>
+                    </Reveal>
+
+                    <Reveal delay={baseDelay + stepDelay * 2.4} duration={baseDuration * 0.8}>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                        <Input
-                          type="text"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          placeholder="Enter your full name"
+                        <label className="block text-sm font-medium text-gray-700 mb-2">I'm interested in</label>
+                        <Select value={formData.interest} onValueChange={(value) => handleInputChange('interest', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your area of interest" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white">
+                            {services.map((service, index) => (
+                              <SelectItem key={index} value={service}>
+                                {service}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </Reveal>
+
+                    <Reveal delay={baseDelay + stepDelay * 2.6} duration={baseDuration * 0.8}>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                        <Textarea
+                          value={formData.message}
+                          onChange={(e) => handleInputChange('message', e.target.value)}
+                          placeholder="Tell us about your training needs, team size, timeline, or any specific requirements..."
                           required
                         />
                       </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                        <Input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
-                          placeholder="your.email@company.com"
-                          required
-                        />
-                      </div>
-                    </div>
+                    </Reveal>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Company/Organization</label>
-                        <Input
-                          type="text"
-                          value={formData.company}
-                          onChange={(e) => handleInputChange('company', e.target.value)}
-                          placeholder="Your company name"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                        <Input
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="+1 (555) 123-4567"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">I'm interested in</label>
-                      <Select value={formData.interest} onValueChange={(value) => handleInputChange('interest', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your area of interest" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white">
-                          {services.map((service, index) => (
-                            <SelectItem key={index} value={service}>
-                              {service}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                      <Textarea
-                        value={formData.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
-                        placeholder="Tell us about your training needs, team size, timeline, or any specific requirements..."
-                        required
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      size="lg" 
-                      className="w-full bg-upwise-blue-600 hover:bg-upwise-blue-700 text-white group"
-                    >
-                      Send Message
-                      <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Reveal delay={baseDelay + stepDelay * 2.8} duration={baseDuration * 0.8}>
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full bg-upwise-blue-600 hover:bg-upwise-blue-700 text-white group"
+                      >
+                        Send Message
+                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Reveal>
                   </form>
                 </CardContent>
               </Card>
-              </Reveal>
-            </div>
-         
+            </Reveal>
+          </div>
         </div>
 
         {/* Newsletter Signup */}
-        <Reveal>
+        <Reveal delay={baseDelay + stepDelay * 4} duration={baseDuration}>
           <div className="mt-20 text-center bg-gradient-to-r from-upwise-blue-600 to-upwise-teal-600 rounded-2xl p-12 text-white">
             <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
             <p className="text-upwise-blue-100 mb-8 max-w-2xl mx-auto">

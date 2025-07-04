@@ -1,309 +1,123 @@
 import React from 'react';
-import { BarChart3, Monitor, MessageSquare, Zap, Users, GraduationCap } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Reveal from '@/components/Reveal';
-import { motion } from 'framer-motion';
 
 const Offerings = () => {
-  const mainOfferings = [
+  // Animation timing configuration
+  const baseDelay = 0.1;
+  const stepDelay = 0.15;
+  const baseDuration = 0.6;
+
+  const keyOfferings = [
     {
-      icon: BarChart3,
-      title: "Excel Mastery",
-      description: "From basics to advanced analytics, master Excel for data analysis, reporting, and automation",
-      features: ["Advanced Formulas & Functions", "Pivot Tables & Charts", "Data Analysis & Visualization", "Automation with Macros"],
-      color: "from-upwise-blue-500 to-upwise-blue-600"
+      title: "Corporate Training",
+      description: "Excel, PPT, Communication skills development",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      features: [
+        "Advanced Excel techniques",
+        "PowerPoint mastery",
+        "Effective communication",
+        "Business presentation skills"
+      ]
     },
     {
-      icon: Monitor,
-      title: "PowerPoint Excellence",
-      description: "Create compelling presentations that engage, persuade, and deliver impactful messages",
-      features: ["Design Principles", "Storytelling Techniques", "Visual Communication", "Executive Presentations"],
-      color: "from-upwise-teal-500 to-upwise-teal-600"
+      title: "Train the Trainer",
+      description: "For aspiring corporate coaches",
+      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      features: [
+        "Certification program",
+        "Instructional design",
+        "Adult learning principles",
+        "Classroom facilitation"
+      ]
     },
     {
-      icon: MessageSquare,
-      title: "Communication Skills",
-      description: "Develop confident communication for meetings, presentations, and leadership scenarios",
-      features: ["Public Speaking", "Executive Presence", "Meeting Facilitation", "Cross-cultural Communication"],
-      color: "from-upwise-coral-400 to-upwise-coral-500"
+      title: "1:1 Coaching",
+      description: "Personalized professional upskilling",
+      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      features: [
+        "Customized learning plans",
+        "Executive coaching",
+        "Leadership development",
+        "Career guidance"
+      ]
     },
     {
-      icon: Zap,
-      title: "Productivity Optimization",
-      description: "Streamline workflows and maximize efficiency with proven productivity strategies",
-      features: ["Time Management", "Task Prioritization", "Workflow Automation", "Digital Organization"],
-      color: "from-purple-500 to-purple-600"
+      title: "Micro-Content",
+      description: "Toolkits, videos, and books",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+      features: [
+        "Quick reference guides",
+        "Instructional videos",
+        "E-books and workbooks",
+        "Templates and frameworks"
+      ]
     }
   ];
-
-  const specialPrograms = [
-    {
-      icon: GraduationCap,
-      title: "Train-the-Trainer Programs",
-      description: "Comprehensive certification programs for aspiring corporate trainers and L&D professionals",
-      highlights: ["Certification Included", "6-Month Program", "Hands-on Practice"]
-    },
-    {
-      icon: Users,
-      title: "Capability Building",
-      description: "Custom organizational development programs tailored to your team's specific needs",
-      highlights: ["Custom Curriculum", "Team Assessment", "Progress Tracking"]
-    }
-  ];
-
-  const challengeBoxVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    },
-    hover: {
-      scale: 1.02,
-      transition: { duration: 0.2 }
-    }
-  };
 
   return (
-    <section id="offerings" className="section-padding bg-gray-50"style={{ marginLeft: 180, marginRight: 180 }}>
-      <div className="container-custom">
-        {/* Header */}
-        <Reveal direction="up">
+    <section id="key-offerings" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 md:mx-[120px] mx-0">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Heading */}
+        <Reveal delay={baseDelay}>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-gradient">Key Offerings</span>
+              <span className="text-gradient bg-gradient-to-r from-[#0284c7] to-[#0d9488] bg-clip-text text-transparent">Key Offerings</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive corporate training programs designed to elevate professional skills 
-              and drive measurable business outcomes.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive solutions for professional development and corporate learning
             </p>
           </div>
         </Reveal>
 
-        {/* Main Offerings */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          {mainOfferings.map((offering, index) => (
-            <Reveal key={index} delay={index * 0.1}>
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white border-0">
-                <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${offering.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                    <offering.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-gray-900">{offering.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-6 leading-relaxed">{offering.description}</p>
+        {/* Key Offerings Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {keyOfferings.map((offering, index) => (
+            <Reveal 
+              key={index}
+              delay={baseDelay + stepDelay * (1 + index * 0.5)}
+            >
+              <div className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full group">
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={offering.image}
+                    alt={offering.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    unoptimized={true}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    <span className="bg-gradient-to-r from-[#0284c7] to-[#0d9488] bg-clip-text text-transparent">
+                      {offering.title}
+                    </span>
+                  </h3>
+                  <p className="text-gray-600 mb-4">{offering.description}</p>
                   <ul className="space-y-2">
-                    {offering.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-upwise-blue-500 rounded-full mr-3 flex-shrink-0"></div>
-                        {feature}
-                      </li>
+                    {offering.features.map((feature, idx) => (
+                      <Reveal 
+                      
+                        key={idx}
+                        delay={baseDelay + stepDelay * (2 + index * 0.5 + idx * 0.1)}
+                      >
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 mt-1 mr-2 text-[#0284c7] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      </Reveal>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Reveal>
           ))}
         </div>
-
-        {/* Special Programs */}
-        <Reveal direction="up">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Specialized Programs</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Advanced certification and development programs for organizations and individuals 
-              looking to build training capabilities.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {specialPrograms.map((program, index) => (
-            <Reveal key={index} delay={index * 0.2}>
-              <Card className="p-8 bg-white hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-upwise-blue-100 to-upwise-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <program.icon className="w-6 h-6 text-upwise-blue-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-xl font-bold text-gray-900 mb-3">{program.title}</h4>
-                      <p className="text-gray-600 mb-4 leading-relaxed">{program.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {program.highlights.map((highlight, highlightIndex) => (
-                          <span
-                            key={highlightIndex}
-                            className="px-3 py-1 bg-upwise-blue-100 text-upwise-blue-800 text-sm rounded-full"
-                          >
-                            {highlight}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Challenges & Solutions Section */}
-        <Reveal>
-          <div className="flex flex-col items-center mb-16">
-            <h2
-              className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center"
-              style={{ marginBottom: 60 }}
-            >
-              Where Upskilling Challenges Meet<br />
-              <span className="text-gradient">Seamless Corporate Training Solutions</span>
-            </h2>
-
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Large Organization Challenges */}
-              <motion.div
-              variants={challengeBoxVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true }}
-              className="solutions-card border-2 border-upwise-blue-500"
-              style={{
-                opacity: 1,
-                transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)',
-                transformStyle: 'preserve-3d'
-              }}
-              >
-              <div className="solutions-header-block">
-                <h3 className="text-color-midnight-blue text-align-center">
-                Large Organization<br />Challenges
-                </h3>
-              </div>
-              {[
-                "Scale and Complexity",
-                "Diverse Learning Needs",
-                "Training in Multiple Geographies",
-                "Non-centralized Training Administration",
-                "Content Update Delays",
-                "Scheduling Conflicts"
-              ].map((item, index) => (
-                <div key={index} className="solution-gradient-block">
-                <div className="text-color-midnight-blue text-align-center">{item}</div>
-                </div>
-              ))}
-              </motion.div>
-
-              {/* Common Challenges - Center Card */}
-                <motion.div
-                variants={challengeBoxVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true }}
-                className="solutions-card border-2 border-upwise-blue-500"
-                style={{
-                opacity: 1,
-                transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)',
-                transformStyle: 'preserve-3d'
-                }}
-                >
-                <div className="solutions-header-block">
-                 <h3 className="text-color-midnight-blue text-align-center">
-                Common Challenges
-                </h3>
-                </div>
-                {[
-                "Logistical Complications",
-                "Lack of In-house Corporate Trainers",
-                "Over-reliance on Multiple Training Vendors",
-                "Consistency in Training Quality",
-                "Content Update Delays",
-                "Training Across Geographies Leading to Compliance Issues"
-                ].map((item, index) => (
-                <div key={index} className="upskill-div">
-                  <div className="text-white text-align-center">{item}</div>
-                </div>
-                ))}
-                </motion.div>
-
-              {/* SMB Challenges */}
-              <motion.div
-              variants={challengeBoxVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true }}
-              className="solutions-card border-2 border-upwise-blue-500"
-              style={{
-                opacity: 1,
-                transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)',
-                transformStyle: 'preserve-3d'
-              }}
-              >
-              <div className="solutions-header-block">
-                <h3 className="text-color-midnight-blue text-align-center">
-                Small & Medium Business<br />Challenges
-                </h3>
-              </div>
-              {[
-                "Vendor Reliability",
-                "Lack of Training Infrastructure, Resources and Processes",
-                "Training in Multiple Geographies",
-                "Customization Challenges",
-                "Budget Constraints",
-                "Cultural Resistance"
-              ].map((item, index) => (
-                <div key={index} className="solution-gradient-block">
-                <div className="text-color-midnight-blue text-align-center">{item}</div>
-                </div>
-              ))}
-              </motion.div>
-            </div>
-
-            <p className="mt-12 text-gray-600 text-center max-w-2xl mx-auto">
-              Upskilling challenges can hinder your organization's growth prospects.<br />
-              <a 
-                href="#contact" 
-                className="text-upwise-blue-600 hover:text-upwise-blue-800 font-medium"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Convert them into opportunities by joining hands with us.
-              </a>
-            </p>
-          </div>
-        </Reveal>
-
-        {/* CTA Section */}
-        <Reveal direction="up">
-          <div className="text-center bg-gradient-to-r from-upwise-blue-600 to-upwise-teal-600 rounded-2xl p-12 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Team's Skills?</h3>
-            <p className="text-upwise-blue-100 mb-8 max-w-2xl mx-auto">
-              Discover how our tailored training programs can drive performance improvements 
-              and career growth in your organization.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-white text-upwise-blue-600 hover:bg-gray-100 px-8 py-3"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Schedule Consultation
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-white text-black hover:bg-white/10 px-8 py-3"
-                onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                View All Programs
-              </Button>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
